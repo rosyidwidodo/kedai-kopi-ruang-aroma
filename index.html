@@ -18,11 +18,17 @@
 
     <!-- My Style -->
     <link rel="stylesheet" href="css/style.css" />
+
+    <!-- AlpineJS -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  
+  <!-- App -->
+   <script src="src/app.js"></script>
   </head>
 
   <body>
     <!-- Navbar start -->
-    <nav class="navbar">
+    <nav class="navbar" x-data>
       <a href="#" class="navbar-logo">Ruang<span>Aroma</span>.</a>
 
       <div class="navbar-nav">
@@ -35,8 +41,9 @@
       <div class="navbar-extra">
         <a href="#" id="search-button"> <i data-feather="search"></i></a>
         <a href="#" id="shopping-cart-button">
-          <i data-feather="shopping-cart"></i
-        ></a>
+          <i data-feather="shopping-cart"></i>
+        <span class="quantity-badge" x-show="$store.cart.quantity" x-text="$store.cart.quantity"></span>
+        </a>
         <a href="#" id="hamburger-menu"> <i data-feather="menu"></i></a>
       </div>
 
@@ -49,61 +56,29 @@
 
       <!-- Shopping Cart Start -->
       <div class="shopping-cart">
+        <template x-for="(item, index) in $store.cart.items" x-key="index">
         <div class="cart-item">
-          <img src="img/Menu/blackcoffe.jpeg" alt="produk1" />
+          <img :src="`img/Menu/${item.img}`" :alt="item.name" />
           <div class="item-detail">
-            <h3>Black Coffee</h3>
-            <div class="item-price">IDR 18k</div>
+            <h3 x-text="item.name"></h3>
+            <div class="item-price">
+              <span x-text="rupiah(item.price)"></span> &times;
+              
+              <!-- &times/&equals = menggunakan bahasa HTML 5 -->
+              <!-- TOMBOL (-) -->
+              <button id="remove" @click="$store.cart.remove(item.id)">&minus;</button>
+              <span x-text="item.quantity"></span>
+              <!-- TOMBOL (+) -->
+              <button id="add" @click="$store.cart.add(item)">&plus;</button>&equals;
+              <span x-text="rupiah(item.total)"></span>
+            </div>
           </div>
-          <i data-feather="trash-2" class="remove-item"></i>
         </div>
-        <div class="cart-item">
-          <img src="img/Menu/coffelatte.jpeg" alt="produk2" />
-          <div class="item-detail">
-            <h3>Cappuccino</h3>
-            <div class="item-price">IDR 22k</div>
-          </div>
-          <i data-feather="trash-2" class="remove-item"></i>
-        </div>
-
-        <div class="cart-item">
-          <img src="img/Menu/expressocoffe.jpeg" alt="produk3" />
-          <div class="item-detail">
-            <h3>Espresso</h3>
-            <div class="item-price">IDR 20k</div>
-          </div>
-          <i data-feather="trash-2" class="remove-item"></i>
-        </div>
-
-        <div class="cart-item">
-          <img src="img/Menu/icevanillalatte.jpeg" alt="produk4" />
-          <div class="item-detail">
-            <h3>Ice Vanilla Latte</h3>
-            <div class="item-price">IDR 18k</div>
-          </div>
-          <i data-feather="trash-2" class="remove-item"></i>
-        </div>
-
-        <div class="cart-item">
-          <img src="img/Menu/latteicecream.jpg" alt="produk5" />
-          <div class="item-detail">
-            <h3>Latte Ice Cream</h3>
-            <div class="item-price">IDR 22k</div>
-          </div>
-          <i data-feather="trash-2" class="remove-item"></i>
-        </div>
-
-        <div class="cart-item">
-          <img src="img/Menu/whitecoffe.jpeg" alt="produk6" />
-          <div class="item-detail">
-            <h3>Luwak White Coffee</h3>
-            <div class="item-price">IDR 18k</div>
-          </div>
-          <i data-feather="trash-2" class="remove-item"></i>
-        </div>
+      </template>
       </div>
+      <!-- Shopping Cart End -->
+    
     </nav>
-    <!-- Shopping Cart End -->
     <!-- Navbar end -->
 
     <!-- Hero Section Start-->
@@ -112,7 +87,7 @@
       <main class="content">
         <h1>Mari Nikmati Secangkir <span>Kopi</span></h1>
         <p>
-          Mulai hari mu dengan semangat baru bersama Kopi Aroma. Nikmati racikan
+          Mulai hari mu dengan semangat baru bersama Kopi Aroma nikmat racikan
           kopi terbaik dari biji pilihan.</p>
       </main>
     </div>
@@ -145,7 +120,7 @@
     <!-- About Section End-->
 
     <!-- Menu Section Start-->
-    <section id="menu" class="menu">
+    <section id="menu" class="menu" x-data="menu">
       <h2>><span>Menu</span> Kami</h2>
       <p>
         Kami punya banyak pilihan kopi, dari yang pahit sampai yang manis. Semua
@@ -154,132 +129,100 @@
       </p>
 
       <div class="row">
-        <!-- Menu 1 -->
+        <template x-for="(item, index) in items" x-key="index">
+        <!-- Menu -->
         <div class="menu-card">
           <div class="menu-icons">
-            <a href="#"><i data-feather="shopping-cart"></i></a>
-            <a href="#" class="item-detail-button"><i data-feather="eye"></i></a>
+            <!-- ICON SHOPPING_CART -->
+            <a href="#" @click.prevent="$store.cart.add(item)">
+              <svg
+                width="24"
+                height="24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round">
+                <use href="img/feather-sprite.svg#shopping-cart" />
+              </svg>
+            </a>
+            <!-- ICON EYE -->
+            <a href="#" class="item-detail-button">
+              <svg
+                width="24"
+                height="24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round">
+                <use href="img/feather-sprite.svg#eye" />
+              </svg>
+            </a>
           </div>
           <img
-            src="img/Menu/blackcoffe.jpeg"
-            alt="blackcoffe"
+            :src="`img/menu/${item.img}`"
+            :alt="item.name"
             class="menu-card-img"
           />
-          <h3 class="menu-card-title">- Black Coffee -</h3>
+          <h3 x-text="item.name"></h3>
           <div class="product-stars">
-            <i data-feather="star" class="star-full"></i>
-            <i data-feather="star" class="star-full"></i>
-            <i data-feather="star" class="star-full"></i>
-            <i data-feather="star" class="star-full"></i>
-            <i data-feather="star"></i>
+              <!-- BINTANG 1 -->
+            <svg
+                width="24"
+                height="24"
+                fill="currentColor"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round">
+                <use href="img/feather-sprite.svg#star" />
+              </svg>
+              <svg
+                width="24"
+                height="24"
+                fill="currentColor"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round">
+                <use href="img/feather-sprite.svg#star" />
+              </svg>
+              <svg
+                width="24"
+                height="24"
+                fill="currentColor"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round">
+                <use href="img/feather-sprite.svg#star" />
+              </svg>
+              <svg
+                width="24"
+                height="24"
+                fill="currentColor"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round">
+                <use href="img/feather-sprite.svg#star" />
+              </svg>
+              <svg
+                width="24"
+                height="24"
+                fill="currentColor"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round">
+                <use href="img/feather-sprite.svg#star" />
+              </svg>
+              <!-- BINTANG 5 -->
           </div>
-          <p class="menu-card-price">IDR 18k <span>IDR 22k</span></p>
+          <p class="menu-card-price"><span x-text="rupiah(item.price)"></span></p>
         </div>
-        <!-- Menu 2 -->
-        <div class="menu-card">
-          <div class="menu-icons">
-            <a href="#"><i data-feather="shopping-cart"></i></a>
-            <a href="#" class="item-detail-button"><i data-feather="eye"></i></a>
-          </div>
-          <img
-            src="img/Menu/coffelatte.jpeg"
-            alt="coffelatte"
-            class="menu-card-img"
-          />
-          <h3 class="menu-card-title">- Cappuccino -</h3>
-          <div class="product-stars">
-            <i data-feather="star" class="star-full"></i>
-            <i data-feather="star" class="star-full"></i>
-            <i data-feather="star" class="star-full"></i>
-            <i data-feather="star" class="star-full"></i>
-            <i data-feather="star" class="star-full"></i>
-          </div>
-          <p class="menu-card-price">IDR 22k <span>IDR 28k</span></p>
-        </div>
-        <!-- Menu 3 -->
-        <div class="menu-card">
-          <div class="menu-icons">
-            <a href="#"><i data-feather="shopping-cart"></i></a>
-            <a href="#" class="item-detail-button"><i data-feather="eye"></i></a>
-          </div>
-          <img
-            src="img/Menu/expressocoffe.jpeg"
-            alt="Espresso"
-            class="menu-card-img"
-          />
-          <h3 class="menu-card-title">- Espresso -</h3>
-          <div class="product-stars">
-            <i data-feather="star" class="star-full"></i>
-            <i data-feather="star" class="star-full"></i>
-            <i data-feather="star" class="star-full"></i>
-            <i data-feather="star" class="star-full"></i>
-            <i data-feather="star" class="star-full"></i>
-          </div>
-          <p class="menu-card-price">IDR 20k <span>IDR 26k</span></p>
-        </div>
-        <!-- Menu 4 -->
-        <div class="menu-card">
-          <div class="menu-icons">
-            <a href="#"><i data-feather="shopping-cart"></i></a>
-            <a href="#" class="item-detail-button"><i data-feather="eye"></i></a>
-          </div>
-          <img
-            src="img/Menu/icevanillalatte.jpeg"
-            alt="icevanillalatte"
-            class="menu-card-img"
-          />
-          <h3 class="menu-card-title">- Ice Vanilla Latte -</h3>
-          <div class="product-stars">
-            <i data-feather="star" class="star-full"></i>
-            <i data-feather="star" class="star-full"></i>
-            <i data-feather="star" class="star-full"></i>
-            <i data-feather="star" class="star-full"></i>
-            <i data-feather="star"></i>
-          </div>
-          <p class="menu-card-price">IDR 18k <span>IDR 22k</span></p>
-        </div>
-        <!-- Menu 5 -->
-        <div class="menu-card">
-          <div class="menu-icons">
-            <a href="#"><i data-feather="shopping-cart"></i></a>
-            <a href="#" class="item-detail-button"><i data-feather="eye"></i></a>
-          </div>
-          <img
-            src="img/Menu/latteicecream.jpg"
-            alt="latteicecream"
-            class="menu-card-img"
-          />
-          <h3 class="menu-card-title">- Latte Ice Cream -</h3>
-          <div class="product-stars">
-            <i data-feather="star" class="star-full"></i>
-            <i data-feather="star" class="star-full"></i>
-            <i data-feather="star" class="star-full"></i>
-            <i data-feather="star" class="star-full"></i>
-            <i data-feather="star"></i>
-          </div>
-          <p class="menu-card-price">IDR 22k <span>IDR 28k</span></p>
-        </div>
-        <!-- Menu 6 -->
-        <div class="menu-card">
-          <div class="menu-icons">
-            <a href="#"><i data-feather="shopping-cart"></i></a>
-            <a href="#" class="item-detail-button"><i data-feather="eye"></i></a>
-          </div>
-          <img
-            src="img/Menu/whitecoffe.jpeg"
-            alt="whitecoffe"
-            class="menu-card-img"
-          />
-          <h3 class="menu-card-title">- Luwak White Coffee -</h3>
-          <div class="product-stars">
-            <i data-feather="star" class="star-full"></i>
-            <i data-feather="star" class="star-full"></i>
-            <i data-feather="star" class="star-full"></i>
-            <i data-feather="star" class="star-full"></i>
-            <i data-feather="star" class="star-full"></i>
-          </div>
-          <p class="menu-card-price">IDR 20k <span>IDR 24k</span></p>
-        </div>
+      </template>
       </div>
     </section>
     <!-- Menu Section End-->
