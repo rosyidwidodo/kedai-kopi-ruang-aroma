@@ -278,7 +278,7 @@ body {
 
 .about .row .about-img img {
   width: 100%;
-  mask-image: url("../img/Menu/3.svg");
+  mask-image: url("../img/3.svg");
   mask-size: 100%;
   mask-repeat: no-repeat;
   mask-position: center;
@@ -350,7 +350,7 @@ body {
 .menu .row .menu-card-img {
   border-radius: 50%;
   width: 80%;
-  height: 25rem;
+  height: 20rem;
   padding: 0.5rem 0;
 }
 .menu .row .menu-card .menu-card-title {
