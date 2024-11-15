@@ -2,8 +2,9 @@
 const navbarNav = document.querySelector(".navbar-nav");
 
 // ketika humberger menu di klik
-document.querySelector("#hamburger-menu").onclick = () => {
+document.querySelector("#hamburger-menu").onclick = (e) => {
   navbarNav.classList.toggle("active");
+  e.preventDefault();
 };
 
 // Toogle class Active untuk Search Form
