@@ -89,24 +89,27 @@ form.addEventListener("keyup", function () {
 });
 
 // kirim data ketika checkout di klik
-checkoutButton.addEventListener("click", async function (e) {
+// checkoutButton.addEventListener("click", async function (e) {
+checkoutButton.addEventListener("click", function (e) {
   e.preventDefault();
   const formData = new FormData(form);
   const data = new URLSearchParams(formData);
   const objData = Object.fromEntries(data);
+  const message = formatMessage(objData);
+  window.open("http://wa.me/081382020191?text=" + encodeURIComponent(message));
 
   // Minta transaction token menggunakan ajax / fetch
-  try {
-    const response = await fetch("php/placeOrder.php", {
-      method: "POST",
-      body: data,
-    });
-    const token = await response.text();
+  // try {
+  //   const response = await fetch("php/placeOrder.php", {
+  //     method: "POST",
+  //     body: data,
+  //   });
+  //   const token = await response.text();
 
-    window.snap.pay(token);
-  } catch (err) {
-    console.log(err.message);
-  }
+  //   window.snap.pay(token);
+  // } catch (err) {
+  //   console.log(err.message);
+  // }
 });
 
 // Format pesan Whatsapp
