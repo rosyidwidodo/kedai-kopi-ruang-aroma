@@ -423,6 +423,11 @@ body {
   border: 1px solid var(--primary);
 }
 
+.menu .row .menu-card-price {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
 .menu .product-stars {
   font-size: 1.7rem;
   padding: 0.8rem;
@@ -431,11 +436,6 @@ body {
 
 .menu .product-stars .star-full {
   fill: var(--primary);
-}
-
-.menu .row .menu-card-price {
-  font-size: 1.3rem;
-  font-weight: bold;
 }
 
 /* Contact Section */
@@ -579,7 +579,7 @@ footer .credit a {
 }
 
 .modal-content p {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   line-height: 1.8rem;
   margin-top: 1.2rem;
 }
@@ -592,6 +592,21 @@ footer .credit a {
   color: #fff;
   margin-top: 1rem;
   padding: 1rem 1.6rem;
+}
+
+.modal-content h3 {
+  font-size: 1.8rem;
+  text-decoration: underline;
+}
+
+.modal .product-stars {
+  font-size: 1.7rem;
+  padding: 0.8rem;
+  color: var(--primary);
+}
+
+.modal .product-stars .star-full {
+  fill: var(--primary);
 }
 
 /* Media Queries */

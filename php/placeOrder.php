@@ -19,6 +19,7 @@ require_once dirname(__FILE__) . '/midtrans-php-master/Midtrans.php';
 // Set 3DS transaction for credit card to true
 \Midtrans\Config::$is3ds = true;
 
+
 $params = array(
     'transaction_details' => array(
         'order_id' => rand(),
@@ -32,6 +33,10 @@ $params = array(
     ),
 );
 
+try {
 $snapToken = \Midtrans\Snap::getSnapToken($params);
 echo $snapToken;
- ?>
+} catch(Exception $e) {
+    echo json_encode(["error" => $e->getMessage()]);
+}
+?>
