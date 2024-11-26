@@ -109,20 +109,6 @@ checkoutButton.addEventListener("click", async function (e) {
   }
 });
 
-// Format pesan Whatsapp
-// const formatMessage = (obj) => {
-//   return `Data Costumer
-//   Nama : $(obj.name)
-//   Email: $(obj.email)
-//   No HP: $(obj.phone)
-// Data Pesanan
-//   ${JSON.parse(obj.items).map(
-//     (item) => `${item.name} (${item.quantity} x ${rupiah(item.total)}) \n`
-//   )}
-//   TOTAL: ${rupiah(obj.total)}
-//   Terima Kasih.`;
-// };
-
 // Konversi nilai uang ke Rupiah
 const rupiah = (number) => {
   return new Intl.NumberFormat("id-ID", {

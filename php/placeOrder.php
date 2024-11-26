@@ -33,10 +33,6 @@ $params = array(
     ),
 );
 
-try {
 $snapToken = \Midtrans\Snap::getSnapToken($params);
 echo $snapToken;
-} catch(Exception $e) {
-    echo json_encode(["error" => $e->getMessage()]);
-}
 ?>
