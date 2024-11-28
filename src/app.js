@@ -1,12 +1,48 @@
 document.addEventListener("alpine:init", () => {
   Alpine.data("menu", () => ({
     items: [
-      { id: 1, name: "Black Coffee", img: "1.jpg", price: 18000 },
-      { id: 2, name: "Cappuccino", img: "2.jpg", price: 22000 },
-      { id: 3, name: "Espresso", img: "3.jpg", price: 20000 },
-      { id: 4, name: "Ice Vanilla Latte", img: "4.jpg", price: 18000 },
-      { id: 5, name: "Latte Ice Cream", img: "5.jpg", price: 22000 },
-      { id: 6, name: "Luwak White Coffee", img: "6.jpg", price: 20000 },
+      {
+        id: 1,
+        name: "Black Coffee",
+        img: "1.jpg",
+        text: "Kopi hitam tanpa campuran, rasa pahit khas kopi",
+        price: 18000,
+      },
+      {
+        id: 2,
+        name: "Cappuccino",
+        img: "2.jpg",
+        text: "Espresso dengan susu berbusa tebal, rasa creamy",
+        price: 22000,
+      },
+      {
+        id: 3,
+        name: "Espresso",
+        img: "3.jpg",
+        text: "Kopi sangat pekat, cocok untuk yang suka rasa kuat",
+        price: 20000,
+      },
+      {
+        id: 4,
+        name: "Ice Vanilla Latte",
+        img: "4.jpg",
+        text: "Kopi susu dingin dengan aroma vanilla yang manis",
+        price: 18000,
+      },
+      {
+        id: 5,
+        name: "Latte Ice Cream",
+        img: "5.jpg",
+        text: "Perpaduan es krim dan kopi susu, rasa unik",
+        price: 22000,
+      },
+      {
+        id: 6,
+        name: "Luwak White Coffee",
+        img: "6.jpg",
+        text: "Kopi unik dari biji kopi yang dimakan dan dikeluarkan oleh luwak",
+        price: 20000,
+      },
     ],
   }));
 

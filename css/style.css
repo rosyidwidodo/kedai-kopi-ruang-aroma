@@ -362,7 +362,8 @@ body {
 }
 
 /* Menu Section */
-.menu h2 {
+.menu h2,
+h4 {
   margin-bottom: 1rem;
 }
 
@@ -413,10 +414,6 @@ body {
   height: 20rem;
   padding: 0.5rem 0;
 }
-.menu .row .menu-card .menu-card-title {
-  margin-top: 1rem auto 0.5rem;
-  font-size: 2rem;
-}
 
 .menu .row .menu-icons a:hover {
   background-color: var(--primary);
@@ -428,14 +425,17 @@ body {
   font-weight: bold;
 }
 
+.menu .row h4 {
+  position: relative;
+  font-size: 1.2rem;
+  font-weight: bold;
+  font-style: italic;
+}
+
 .menu .product-stars {
   font-size: 1.7rem;
   padding: 0.8rem;
   color: var(--primary);
-}
-
-.menu .product-stars .star-full {
-  fill: var(--primary);
 }
 
 /* Contact Section */
